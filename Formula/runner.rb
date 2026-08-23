@@ -5,7 +5,7 @@
 # Binary name inside each archive remains: dowork-runner
 #
 # After each GitHub Release of dowork-runner:
-#   1. Set 0.1.0 (no leading "v"; matches GoReleaser {{ .Version }}).
+#   1. Set 0.2.0 (no leading "v"; matches GoReleaser {{ .Version }}).
 #   2. Fill the four SHA256 placeholders from release checksums.txt.
 #   3. Copy this file into the tap repo as Formula/runner.rb (strip this header if desired).
 #
@@ -18,28 +18,28 @@
 class Runner < Formula
   desc "do-work.io machine runner — claim, heartbeat, spawn factory sandboxes"
   homepage "https://do-work.io"
-  version "0.1.0"
+  version "0.2.0"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/original-solutions/dowork-runner/releases/download/v0.1.0/dowork-runner_0.1.0_darwin_arm64.tar.gz"
-      sha256 "a7e3f96e45631187d711fef6c145d3c24607ffdfc7680fb3342cd5b98eb03c6c"
+      url "https://github.com/original-solutions/dowork-runner/releases/download/v0.2.0/dowork-runner_0.2.0_darwin_arm64.tar.gz"
+      sha256 "60fe6786c21beb5dc31c18b64d3ddba418aa3a7a962e0d6ea86f224ea899d9a2"
     end
     on_intel do
-      url "https://github.com/original-solutions/dowork-runner/releases/download/v0.1.0/dowork-runner_0.1.0_darwin_amd64.tar.gz"
-      sha256 "254a4cb5b98b51cc6e4187e660522138c8318bb2124a02941a62b2ba8622c401"
+      url "https://github.com/original-solutions/dowork-runner/releases/download/v0.2.0/dowork-runner_0.2.0_darwin_amd64.tar.gz"
+      sha256 "d6fa6239ab3016c7024622a0366932ca7eb0ddac3c2f6e1cc219a00c1c336b69"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/original-solutions/dowork-runner/releases/download/v0.1.0/dowork-runner_0.1.0_linux_arm64.tar.gz"
-      sha256 "caa0bcbe72ffff5395298c65be56396437fb604c82e2d8f0dd4b8da763f8e2d9"
+      url "https://github.com/original-solutions/dowork-runner/releases/download/v0.2.0/dowork-runner_0.2.0_linux_arm64.tar.gz"
+      sha256 "f02877cb04cb5b9c59aabfca6a9e3bb0af03a6b9ec305358c13055d035d5e7b7"
     end
     on_intel do
-      url "https://github.com/original-solutions/dowork-runner/releases/download/v0.1.0/dowork-runner_0.1.0_linux_amd64.tar.gz"
-      sha256 "bebdbf032a3171626cb53e8b94eff4cc66e0a629ad3d102583197e1632b313f9"
+      url "https://github.com/original-solutions/dowork-runner/releases/download/v0.2.0/dowork-runner_0.2.0_linux_amd64.tar.gz"
+      sha256 "1316cc0dc05c3192823952d22ffd52fdd719a1882b8f4bb9e1715c8ec622f66f"
     end
   end
 
@@ -54,14 +54,21 @@ class Runner < Formula
         brew tap original-solutions/dowork
         brew trust original-solutions/dowork
         brew install original-solutions/dowork/runner
-      From-source / launchd (dev):
+      Pair, then start the LaunchAgent (not brew services):
+        dowork-runner claim --server https://api.do-work.io
+        dowork-runner install-service
+      Foreground instead of a service:
+        dowork-runner run
+      Reload an existing unit:
+        dowork-runner restart
+      From-source build (this clone):
         make agent-install
-      Do not use `brew services` for this formula — launchd is owned by make agent-install.
+      Do not use `brew services` for this formula — launchd is io.dowork.runner.
     EOS
   end
 
   # Optional Homebrew service (alternate). Product path is preferred:
-  #   make agent-install
+  #   dowork-runner install-service
   # Do not enable both brew services and io.dowork.runner on the same machine.
   # service do
   #   run [opt_bin/"dowork-runner", "run"]
