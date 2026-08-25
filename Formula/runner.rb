@@ -5,7 +5,7 @@
 # Binary name inside each archive remains: dowork-runner
 #
 # After each GitHub Release of dowork-runner:
-#   1. Set 0.2.0 (no leading "v"; matches GoReleaser {{ .Version }}).
+#   1. Set 0.3.0 (no leading "v"; matches GoReleaser {{ .Version }}).
 #   2. Fill the four SHA256 placeholders from release checksums.txt.
 #   3. Copy this file into the tap repo as Formula/runner.rb (strip this header if desired).
 #
@@ -18,28 +18,28 @@
 class Runner < Formula
   desc "do-work.io machine runner — claim, heartbeat, spawn factory sandboxes"
   homepage "https://do-work.io"
-  version "0.2.0"
+  version "0.3.0"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/original-solutions/dowork-runner/releases/download/v0.2.0/dowork-runner_0.2.0_darwin_arm64.tar.gz"
-      sha256 "60fe6786c21beb5dc31c18b64d3ddba418aa3a7a962e0d6ea86f224ea899d9a2"
+      url "https://github.com/original-solutions/dowork-runner/releases/download/v0.3.0/dowork-runner_0.3.0_darwin_arm64.tar.gz"
+      sha256 "8aee078ea816c6b25bc7b1556bdde4a3a0de376f4d33e7c75198904d960fcec1"
     end
     on_intel do
-      url "https://github.com/original-solutions/dowork-runner/releases/download/v0.2.0/dowork-runner_0.2.0_darwin_amd64.tar.gz"
-      sha256 "d6fa6239ab3016c7024622a0366932ca7eb0ddac3c2f6e1cc219a00c1c336b69"
+      url "https://github.com/original-solutions/dowork-runner/releases/download/v0.3.0/dowork-runner_0.3.0_darwin_amd64.tar.gz"
+      sha256 "ae77dd4a28a774fa7f4045092dff4ed88423bcd4ad2a5a83750e8ea58f233652"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/original-solutions/dowork-runner/releases/download/v0.2.0/dowork-runner_0.2.0_linux_arm64.tar.gz"
-      sha256 "f02877cb04cb5b9c59aabfca6a9e3bb0af03a6b9ec305358c13055d035d5e7b7"
+      url "https://github.com/original-solutions/dowork-runner/releases/download/v0.3.0/dowork-runner_0.3.0_linux_arm64.tar.gz"
+      sha256 "53d68087f965dcb7decfd26beb461056d0c9bf42dfefcf7890400065c6faceb1"
     end
     on_intel do
-      url "https://github.com/original-solutions/dowork-runner/releases/download/v0.2.0/dowork-runner_0.2.0_linux_amd64.tar.gz"
-      sha256 "1316cc0dc05c3192823952d22ffd52fdd719a1882b8f4bb9e1715c8ec622f66f"
+      url "https://github.com/original-solutions/dowork-runner/releases/download/v0.3.0/dowork-runner_0.3.0_linux_amd64.tar.gz"
+      sha256 "71fc9d3f5c13e717222cfeb98e4f539c32ade2be83102923bff4921fe56fb184"
     end
   end
 
